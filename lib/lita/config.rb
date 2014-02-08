@@ -35,7 +35,7 @@ module Lita
 
       private
 
-      # Adds and populates a Config object to Lita.config.handlers for every
+      # Adds and populates a Config object to config.handlers for every
       # registered handler that implements self.default_config.
       def load_handler_configs(config)
         Lita.handlers.each do |handler|

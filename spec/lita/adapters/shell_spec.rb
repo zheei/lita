@@ -5,7 +5,7 @@ describe Lita::Adapters::Shell do
       name: "Lita",
       mention_name: "LitaBot",
       alias: "/",
-      config: Lita.config
+      config: Lita::Config.default_config
     )
   end
 

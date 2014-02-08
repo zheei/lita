@@ -39,8 +39,14 @@ module Lita
       # Checks if a user is an administrator.
       # @param user [Lita::User] The user.
       # @return [Boolean] Whether or not the user is an administrator.
-      def user_is_admin?(user)
-        Array(Lita.config.robot.admins).include?(user.id)
+      def user_is_admin?(user, robot = nil)
+        config = if robot
+          robot.config
+        else
+          Lita.config
+        end
+
+        Array(config.robot.admins).include?(user.id)
       end
 
       # Returns a list of all authorization groups.

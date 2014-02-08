@@ -65,6 +65,12 @@ module Lita
       yield config
     end
 
+    def configure_robot
+      new_config = Config.default_config
+      yield config
+      robots << Robot.new(new_config)
+    end
+
     # Clears the global configuration object. The next call to {Lita.config}
     # will create a fresh config object.
     # @return [void]
@@ -96,7 +102,7 @@ module Lita
       if robots.empty?
         Robot.new(default_robot_config).run
       else
-        robots.each { robot.run }
+        robots.each { |robot| robot.run }
       end
     end
 

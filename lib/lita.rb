@@ -47,7 +47,13 @@ module Lita
     # The global configuration object. Provides user settings for the robot.
     # @return [Lita::Config] The Lita configuration object.
     def config
-      @config ||= Config.default_config
+      Lita.logger.warn(I18n.t("lita.core.global_config_deprecation"))
+
+      if robots.empty?
+        default_robot_config
+      else
+        robots.first.config
+      end
     end
 
     # Yields the global configuration object. Called by the user in a
@@ -55,6 +61,7 @@ module Lita
     # @yieldparam [Lita::Configuration] config The global configuration object.
     # @return [void]
     def configure
+      Lita.logger.warn(I18n.t("lita.core.global_configure_deprecation"))
       yield config
     end
 
@@ -62,13 +69,13 @@ module Lita
     # will create a fresh config object.
     # @return [void]
     def clear_config
-      @config = nil
+      @default_robot_config = nil
     end
 
     # The global Logger object.
     # @return [::Logger] The global Logger object.
     def logger
-      @logger ||= Logger.get_logger(Lita.config.robot.log_level)
+      @logger ||= Logger.get_logger(default_robot_config.robot.log_level)
     end
 
     # The root Redis object.
@@ -85,7 +92,22 @@ module Lita
     # @return [void]
     def run(config_path = nil)
       Config.load_user_config(config_path)
-      Robot.new(config).run
+
+      if robots.empty?
+        Robot.new(default_robot_config).run
+      else
+        robots.each { robot.run }
+      end
+    end
+
+    private
+
+    def default_robot_config
+      @default_robot_config ||= Config.default_config
+    end
+
+    def robots
+      @robots ||= []
     end
   end
 end

@@ -1,5 +1,12 @@
 en:
   lita:
+    core:
+      global_config_deprecation: >
+        Lita.config is deprecated, as configuration is now specified per robot. Use
+        Lita::Robot#config instead.
+      global_configure_deprecation: >
+        Lita.configure is deprecated, as configuration is now specified per robot. Use
+        Lita.configure_robot instead.
     adapters:
       shell:
         startup_message: Type "exit" or "quit" to end the session.

@@ -31,7 +31,7 @@ module Lita
         # Create common test objects.
         def prepare_let_blocks(base)
           base.class_eval do
-            let(:robot) { Robot.new }
+            let(:robot) { Robot.new(Config.default_config) }
             let(:source) { Source.new(user: user) }
             let(:user) { User.create("1", name: "Test User") }
             let(:replies) { [] }

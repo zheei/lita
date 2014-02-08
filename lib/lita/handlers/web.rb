@@ -12,7 +12,7 @@ module Lita
         response.headers["Content-Type"] = "application/json"
         json = MultiJson.dump(
           lita_version: Lita::VERSION,
-          adapter: Lita.config.robot.adapter,
+          adapter: robot.config.robot.adapter,
           robot_name: robot.name,
           robot_mention_name: robot.mention_name
         )

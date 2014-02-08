@@ -85,7 +85,7 @@ module Lita
     # @return [void]
     def run(config_path = nil)
       Config.load_user_config(config_path)
-      Robot.new.run
+      Robot.new(config).run
     end
   end
 end

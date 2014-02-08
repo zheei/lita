@@ -8,6 +8,8 @@ module Lita
     # @return [Rack::Builder] The +Rack+ app.
     attr_reader :app
 
+    attr_reader :config
+
     # The name the robot will look for in incoming messages to determine if it's
     # being addressed.
     # @return [String] The mention name.
@@ -22,10 +24,11 @@ module Lita
     # @return [String] The robot's name.
     attr_reader :name
 
-    def initialize
-      @name = Lita.config.robot.name
-      @mention_name = Lita.config.robot.mention_name || @name
-      @alias = Lita.config.robot.alias
+    def initialize(config)
+      @config = config
+      @name = config.robot.name
+      @mention_name = config.robot.mention_name || name
+      @alias = config.robot.alias
       @app = RackApp.new(self).to_app
       load_adapter
       trigger(:loaded)
@@ -96,7 +99,7 @@ module Lita
 
     # Loads the selected adapter.
     def load_adapter
-      adapter_name = Lita.config.robot.adapter
+      adapter_name = config.robot.adapter
       adapter_class = Lita.adapters[adapter_name.to_sym]
 
       unless adapter_class
@@ -109,7 +112,7 @@ module Lita
 
     # Starts the web server.
     def run_app
-      http_config = Lita.config.http
+      http_config = config.http
 
       @server_thread = Thread.new do
         @server = Puma::Server.new(app)

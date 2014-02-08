@@ -1,6 +1,12 @@
 describe Lita::Adapters::Shell do
   let(:robot) do
-    instance_double("Lita::Robot", name: "Lita", mention_name: "LitaBot", alias: "/")
+    instance_double(
+      "Lita::Robot",
+      name: "Lita",
+      mention_name: "LitaBot",
+      alias: "/",
+      config: Lita.config
+    )
   end
 
   subject { described_class.new(robot) }
@@ -21,7 +27,7 @@ describe Lita::Adapters::Shell do
     end
 
     it "marks messages as commands if config.adapter.private_chat is true" do
-      Lita.config.adapter.private_chat = true
+      robot.config.adapter.private_chat = true
       expect_any_instance_of(Lita::Message).to receive(:command!)
       subject.run
     end

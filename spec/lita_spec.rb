@@ -21,8 +21,6 @@ describe Lita do
   end
 
   describe ".run" do
-    before { Lita.config }
-
     it "runs a new Robot" do
       expect_any_instance_of(Lita::Robot).to receive(:run)
       described_class.run

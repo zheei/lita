@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe Lita::Robot do
+  subject { described_class.new(Lita.config) }
+
   it "logs and quits if the specified adapter can't be found" do
     adapter_registry = double("adapter_registry")
     allow(Lita).to receive(:adapters).and_return(adapter_registry)

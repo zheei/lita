@@ -57,7 +57,7 @@ module Lita
 
       # The way the bot should be addressed in order to trigger a command.
       def name
-        Lita.config.robot.mention_name || Lita.config.robot.name
+        robot.config.robot.mention_name || robot.config.robot.name
       end
     end
 

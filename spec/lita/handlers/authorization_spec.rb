@@ -1,10 +1,14 @@
 require "spec_helper"
 
 describe Lita::Handlers::Authorization, lita_handler: true do
+  let(:authorization) do
+    auth = Lita::Authorization.new(robot)
+    allow(auth).to receive(:user_is_admin?).and_return(true)
+    auth
+  end
+
   before do
-    allow(Lita::Authorization).to receive(:user_is_admin?).with(
-      user
-    ).and_return(true)
+    allow(Lita::Authorization).to receive(:new).and_return(authorization)
   end
 
   let(:target_user) { instance_double("Lita::User", id: "1", name: "Carl") }
@@ -77,8 +81,8 @@ describe Lita::Handlers::Authorization, lita_handler: true do
 
       before do
         groups.each do |group|
-          Lita::Authorization.add_user_to_group(user, user1, group)
-          Lita::Authorization.add_user_to_group(user, user2, group)
+          authorization.add_user_to_group(user, user1, group)
+          authorization.add_user_to_group(user, user2, group)
         end
       end
 

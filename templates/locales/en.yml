@@ -3,12 +3,8 @@ en:
     core:
       add_robot_block_required: |-
         Lita.add_robot takes a block which receives the robot's config object as a parameter.
-      global_config_deprecation: >
-        Lita.config is deprecated, as configuration is now specified per robot. Use
-        Lita::Robot#config instead.
-      global_configure_deprecation: >
-        Lita.configure is deprecated, as configuration is now specified per robot. Use
-        Lita.configure_robot instead.
+      deprecated: "%{old_method} is deprecated. Use %{new_method} instead."
+      deprecated_no_replacement: "%{old_method} is deprecated with no replacement."
     adapters:
       shell:
         startup_message: Type "exit" or "quit" to end the session.

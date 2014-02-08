@@ -59,39 +59,45 @@ module Lita
     end
 
     # The global configuration object. Provides user settings for the robot.
+    # @deprecated Use {Lita::Robot.config} instead.
     # @return [Lita::Config] The Lita configuration object.
     def config
-      Lita.logger.warn(I18n.t("lita.core.global_config_deprecation"))
+      Lita.logger.warn(
+        "lita.core.deprecated",
+        old_method: "Lita.config",
+        new_method: "Lita::Robot#config"
+      )
 
-      if robots.empty?
-        default_robot_config
-      else
-        robots.first.config
-      end
+      @config ||= Config.default_config
     end
 
-    # Yields the global configuration object. Called by the user in a
-    # lita_config.rb file.
+    # Yields the global configuration object. Called by the user in a lita_config.rb file.
+    # @deprecated Use {.add_robot} instead.
     # @yieldparam [Lita::Configuration] config The global configuration object.
     # @return [void]
     def configure
-      Lita.logger.warn(I18n.t("lita.core.global_configure_deprecation"))
+      Lita.logger.warn(
+        "lita.core.deprecated",
+        old_method: "Lita.configure",
+        new_method: "Lita.add_robot"
+      )
       yield config
     end
 
-    # Clears the default configuration object. If no robots have been configured with
-    # {Lita.add_robot}, the next call to {Lita.config} will return a fresh config object for
-    # the default robot.
+    # Clears the default configuration object. The next call to {Lita.config} will return a fresh
+    # config object for the default robot.
+    # @deprecated The default configuration should be avoided. Use {Lita::Robot}-specific
+    # configuration.
     # @return [void]
-    def clear_default_config
-      @default_robot_config = nil
+    def clear_config
+      Lita.logger.warn("lita.core.deprecated_no_replacement", old_method: "Lita.clear_config")
+      @config = nil
     end
-    alias_method :clear_config, :clear_default_config
 
     # The global Logger object.
     # @return [::Logger] The global Logger object.
     def logger
-      @logger ||= Logger.get_logger(default_robot_config.robot.log_level)
+      @logger ||= Logger.get_logger(config.robot.log_level)
     end
 
     # The root Redis object.
@@ -110,17 +116,13 @@ module Lita
       Config.load_user_config(config_path)
 
       if robots.empty?
-        Robot.new(default_robot_config).run
+        Robot.new(config).run
       else
         robots.each { |robot| robot.run }
       end
     end
 
     private
-
-    def default_robot_config
-      @default_robot_config ||= Config.default_config
-    end
 
     def robots
       @robots ||= []

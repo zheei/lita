@@ -23,6 +23,9 @@ module Lita
 
         begin
           load(config_path)
+        rescue AddRobotError
+          Lita.logger.fatal(I18n.t("lita.core.add_robot_block_required"))
+          abort
         rescue Exception => e
           Lita.logger.fatal I18n.t(
             "lita.config.exception",

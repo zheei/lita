@@ -16,11 +16,25 @@ module Lita
   # The base Redis namespace for all Lita data.
   REDIS_NAMESPACE = "lita"
 
+  class AddRobotError < StandardError; end
+
   class << self
     # The global registry of adapters.
     # @return [Hash] A map of adapter keys to adapter classes.
     def adapters
       @adapters ||= {}
+    end
+
+    # Creates a new [Lita::Robot] and adds it to the collection of robots that will be started
+    # when [.run] is called.
+    # @yieldparam [Lita::Configuration] config The new robot's configuration object.
+    # @return [void]
+    def add_robot
+      raise AddRobotError unless block_given?
+
+      new_config = Config.default_config
+      yield config
+      robots << Robot.new(new_config)
     end
 
     # Adds an adapter to the global registry under the provided key.
@@ -65,18 +79,14 @@ module Lita
       yield config
     end
 
-    def configure_robot
-      new_config = Config.default_config
-      yield config
-      robots << Robot.new(new_config)
-    end
-
-    # Clears the global configuration object. The next call to {Lita.config}
-    # will create a fresh config object.
+    # Clears the default configuration object. If no robots have been configured with
+    # {Lita.add_robot}, the next call to {Lita.config} will return a fresh config object for
+    # the default robot.
     # @return [void]
-    def clear_config
+    def clear_default_config
       @default_robot_config = nil
     end
+    alias_method :clear_config, :clear_default_config
 
     # The global Logger object.
     # @return [::Logger] The global Logger object.

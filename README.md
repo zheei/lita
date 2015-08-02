@@ -30,3 +30,17 @@ For a history of releases, see the [Releases](https://github.com/jimmycuadra/lit
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
+
+## Slack (with Heroku) install tips
+
+[deploy page](http://docs.lita.io/getting-started/deployment/#heroku)
+
+* Add redis:
+`heroku addons:create redistogo`
+Add credit card required.
+
+* Lita keep connect to 127.0.0.1:
+`heroku config:set REDIS_URL=YOUR_SETTING_FROM_HEROKU_ADDON`
+
+* Useful to get debug info:
+`heroku run lita`

@@ -3,10 +3,9 @@ Lita.configure do |config|
   config.robot.name = "iianta"
 
   config.robot.adapter = :slack
-  config.adapters.slack.token = "xoxb-8217264806-XG3X0ZwC1vcCegnkjBKwsWnh"
+  config.adapters.slack.token = "xoxb-dontbother"
 
-#  config.redis[:url] = ENV["REDISTOGO_URL"]
-  config.redis[:url] = 'redis://redistogo:48b5b8ededec52fcf24561c73f7397c8@sole.redistogo.com:9527'
+  config.redis[:url] = ENV["REDISTOGO_URL"]
   config.http.port = ENV["PORT"]
   # The locale code for the language to use.
   # config.robot.locale = :en

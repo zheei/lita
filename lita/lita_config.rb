@@ -5,7 +5,8 @@ Lita.configure do |config|
   config.robot.adapter = :slack
   config.adapters.slack.token = "xoxb-8217264806-XG3X0ZwC1vcCegnkjBKwsWnh"
 
-  config.redis[:url] = ENV["REDISTOGO_URL"]
+#  config.redis[:url] = ENV["REDISTOGO_URL"]
+  config.redis[:url] = 'redis://redistogo:48b5b8ededec52fcf24561c73f7397c8@sole.redistogo.com:9527'
   config.http.port = ENV["PORT"]
   # The locale code for the language to use.
   # config.robot.locale = :en
@@ -22,7 +23,7 @@ Lita.configure do |config|
 
   # The adapter you want to connect with. Make sure you've added the
   # appropriate gem to the Gemfile.
-  #  config.robot.adapter = :shell
+#  config.robot.adapter = :shell
 
   ## Example: Set options for the chosen adapter.
   # config.adapter.username = "myname"

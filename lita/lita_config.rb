@@ -3,7 +3,7 @@ Lita.configure do |config|
   config.robot.name = "iianta"
 
   config.robot.adapter = :slack
-  config.adapters.slack.token = "xoxb-dontbother"
+  config.adapters.slack.token = "xoxb-8217264806-J2YP8jqXNwSWsFfGjSKX0uED"
 
   config.redis[:url] = ENV["REDISTOGO_URL"]
   config.http.port = ENV["PORT"]

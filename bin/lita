@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 require "bundler"
-require "lita/cli"
+# require_relative "lita/cli"
 
 Lita::CLI.start

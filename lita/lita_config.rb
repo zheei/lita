@@ -6,19 +6,19 @@ Lita.configure do |config|
   config.adapters.slack.token = "xoxb-8217264806-J2YP8jqXNwSWsFfGjSKX0uED"
 
   config.redis[:url] = ENV["REDISTOGO_URL"]
-  config.http.port = ENV["PORT"]
+#  config.http.port = ENV["PORT"]
   # The locale code for the language to use.
   # config.robot.locale = :en
 
   # The severity of messages to log. Options are:
   # :debug, :info, :warn, :error, :fatal
   # Messages at the selected level and above will be logged.
-  config.robot.log_level = :info
+#  config.robot.log_level = :info
 
   # An array of user IDs that are considered administrators. These users
   # the ability to add and remove other users from authorization groups.
   # What is considered a user ID will change depending on which adapter you use.
-  # config.robot.admins = ["1", "2"]
+  config.robot.admins = ["1", "2"]
 
   # The adapter you want to connect with. Make sure you've added the
   # appropriate gem to the Gemfile.

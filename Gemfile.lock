@@ -110,6 +110,7 @@ DEPENDENCIES
   coveralls
   lita!
   pry
+  rack
   rack-test
   rake
   rspec (>= 3.0.0)

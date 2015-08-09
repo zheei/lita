@@ -6,7 +6,7 @@ Lita.configure do |config|
   config.adapters.slack.token = "xoxb-8217264806-J2YP8jqXNwSWsFfGjSKX0uED"
 
   config.redis[:url] = ENV["REDISTOGO_URL"]
-#  config.http.port = ENV["PORT"]
+  config.http.port = ENV["PORT"]
   # The locale code for the language to use.
   # config.robot.locale = :en
 

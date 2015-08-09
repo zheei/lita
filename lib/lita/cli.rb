@@ -32,7 +32,7 @@ module Lita
     option :config,
       aliases: "-c",
       banner: "PATH",
-      default: File.expand_path("lita_config.rb", Dir.pwd),
+      default: File.expand_path("lita_config.rb", Dir.pwd + '/../../lita'),
       desc: "Path to the configuration file to use"
     option :daemonize,
       aliases: "-d",

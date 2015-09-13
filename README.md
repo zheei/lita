@@ -44,3 +44,6 @@ Add credit card required.
 
 * Useful to get debug info:
 `heroku run lita`
+
+* Getting "fatal: Not a git repository (or any of the parent directories)" when building and starting app.
+Basically check if 'git' was called at any point in your app. (From: https://groups.google.com/forum/#!topic/heroku/dv8ZlllNafA)

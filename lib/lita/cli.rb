@@ -146,7 +146,7 @@ module Lita
         constant_namespace: constant_namespace,
         spec_type: spec_type,
         required_lita_version: required_lita_version
-      }.merge(generate_user_config).merge(optional_content)
+      } # .merge(generate_user_config).merge(optional_content)
     end
 
     def generate_user_config
